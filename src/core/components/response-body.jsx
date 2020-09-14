@@ -5,6 +5,7 @@ import toLower from "lodash/toLower"
 import { extractFileNameFromContentDispositionHeader } from "core/utils"
 import { getKnownSyntaxHighlighterLanguage } from "core/utils/jsonParse"
 import win from "core/window"
+import JSONbig from "json-bigint"
 
 export default class ResponseBody extends React.PureComponent {
   state = {
@@ -101,7 +102,7 @@ export default class ResponseBody extends React.PureComponent {
         language = "json"
       }
       try {
-        body = JSON.stringify(JSON.parse(content), null, "  ")
+        body = JSONbig.stringify(JSONbig.parse(content), null, "  ")
       } catch (error) {
         body = "can't parse JSON.  Raw result:\n\n" + content
       }

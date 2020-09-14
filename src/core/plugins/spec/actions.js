@@ -6,6 +6,7 @@ import isString from "lodash/isString"
 import debounce from "lodash/debounce"
 import set from "lodash/set"
 import { paramToValue, isEmptyValue } from "core/utils"
+import JSONbig from "json-bigint"
 
 // Actions conform to FSA (flux-standard-actions)
 // {type: string,payload: Any|Error, meta: obj, error: bool}
@@ -222,7 +223,7 @@ const debResolveSubtrees = debounce(async () => {
               if (res instanceof Error || res.status >= 400) {
                 console.error(res.statusText + " " + req.url)
               } else {
-                oidcScheme.openIdConnectData = JSON.parse(res.text)
+                oidcScheme.openIdConnectData = JSONbig.parse(res.text)
               }
             } catch (e) {
               console.error(e)
